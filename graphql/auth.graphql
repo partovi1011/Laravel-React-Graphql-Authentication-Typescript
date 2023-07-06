@@ -1,0 +1,95 @@
+scalar Upload
+  @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Upload")
+
+
+enum Statuses {
+    LOGIN
+    LOGOUT
+    FAILED
+    SUCCESS
+    NOT_AUTHORIZED
+    EMAIL_VERIFIED
+    AVATAR_CHANGED
+    PASSWORD_CHANGED
+    VALIDATION_ERROR
+    MUST_VERIFY_EMAIL
+}
+
+input RegisterInput {
+    name: String!
+    email: String!
+    password: String!
+    password_confirmation: String!
+}
+
+input LoginInput {
+    email: String!
+    password: String!
+}
+
+input RefreshTokenInput {
+    refresh_token: String
+}
+
+
+input ForgotPasswordInput {
+    email: String!
+}
+
+input NewPasswordWithCodeInput {
+    email: String!
+    token: String!
+    password: String!
+    password_confirmation: String!
+}
+
+
+
+input VerifyEmailInput {
+    email: String!
+    token: String!
+}
+
+input UpdatePasswordInput {
+    current_password: String!
+    password: String!
+    password_confirmation: String!
+}
+
+input UpdateUserInput {
+    name: String,
+    email: String, 
+    zip: String, 
+    address: String, 
+    phone: String,
+    status: String
+}
+
+
+
+type AuthPayload {
+    status: Statuses!
+    token: String
+    user: User
+    errors: Mixed
+}
+
+
+
+extend type Mutation {
+    register(input: RegisterInput @spread): AuthPayload! @field(resolver: "App\\GraphQL\\Mutations\\Auth\\Register")
+    login(input: LoginInput! @spread): AuthPayload! @field(resolver: "App\\GraphQL\\Mutations\\Auth\\Login")
+    logout: AuthPayload! @field(resolver: "App\\GraphQL\\Mutations\\Auth\\Logout") @guard(with: ["sanctum"])
+    logoutAllDevices: AuthPayload! @field(resolver: "App\\GraphQL\\Mutations\\Auth\\LogoutAllDevices") @guard(with: ["sanctum"])
+    forgotPassword(input: ForgotPasswordInput! @spread): AuthPayload! @field(resolver: "App\\GraphQL\\Mutations\\Auth\\ForgotPassword")
+    resetPassword(input: NewPasswordWithCodeInput @spread): AuthPayload! @field(resolver: "App\\GraphQL\\Mutations\\Auth\\ResetPassword")
+    verifyEmail(input: VerifyEmailInput! @spread): AuthPayload! @field(resolver: "App\\GraphQL\\Mutations\\Auth\\VerifyEmail")
+    updatePassword(input: UpdatePasswordInput! @spread): AuthPayload! @field(resolver: "App\\GraphQL\\Mutations\\Auth\\UpdatePassword") @guard(with: ["sanctum"])
+    updateUser(input: UpdateUserInput! @spread): AuthPayload! @field(resolver: "App\\GraphQL\\Mutations\\Auth\\UpdateUser") @guard(with: ["sanctum"])
+    uploadAvatar(file: Upload!): AuthPayload! @field(resolver: "App\\GraphQL\\Mutations\\Auth\\UpdateAvatar") @guard(with: ["sanctum"])
+} 
+
+
+
+
+
