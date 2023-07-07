@@ -1,8 +1,18 @@
-<h1>Laravel + React + Sanctum + Graphql + Redux</h1>
+# An Starter Kit for Laravel and React with Graphql
+-Full typescript
 
-<h3>Full TypeScript</h3>
+please follow the guide
 
-## Usage
+
+## Prerequisite
+1. make sure you have [composer](https://getcomposer.org/download/) installed
+2. make sure you have latest stable version of [node](https://nodejs.org/en/download/) installed
+
+## Installation
+
+```bash
+git clone
+```
 
 ```bash
 composer install
@@ -12,7 +22,7 @@ composer install
 npm install
 ```
 
-config your database and email server
+- Config your DB and email server
 
 ```bash
 php artisan migrate
@@ -25,3 +35,12 @@ npm run dev
 ```bash
 php artisan serve
 ```
+
+## Technologies
+- Laravel
+- React
+- Redux
+- Typescript
+- Graphql
+
+
