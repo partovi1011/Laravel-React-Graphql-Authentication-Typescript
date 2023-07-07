@@ -1,5 +1,6 @@
-<h1>Laravel + React + Sanctum + Graphql</h1>
-<h2>TypeScript</h2>
+<h1>Laravel + React + Sanctum + Graphql + Redux</h1>
+
+<h3>Full TypeScript</h3>
 
 ## Usage
 
