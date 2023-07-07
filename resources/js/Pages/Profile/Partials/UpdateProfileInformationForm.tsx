@@ -30,7 +30,7 @@ export default function UpdateProfileInformation({
         status,
     } = useTypedSelector((state) => state.auth);
     
-    const { data, setData, patch, errors, processing, recentlySuccessful } =
+    const { data: formData, setData, patch, errors, processing, recentlySuccessful } =
         useForm({
             name: user?.name,
             email: user?.email,
@@ -40,16 +40,16 @@ export default function UpdateProfileInformation({
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        updateUserAction(data);
+        updateUserAction(formData);
     };
 
     useEffect(()=>{
         if (!_.isNull(user)){
-            setData((data: { name: string | undefined; email: string | undefined; }) => ({
+            setData((data: typeof formData) => ({
                 ...data,
                 name: user.name,
             }));
-            setData((data: { name: string | undefined; email: string | undefined; }) => ({
+            setData((data: typeof formData) => ({
                 ...data,
                 email: user.email,
             }));
@@ -85,7 +85,7 @@ export default function UpdateProfileInformation({
                     <TextInput
                         id="name"
                         className="mt-1 block w-full"
-                        value={data.name}
+                        value={formData.name}
                         onChange={(e) => setData("name", e.target.value)}
                         required
                         isFocused
@@ -111,7 +111,7 @@ export default function UpdateProfileInformation({
                         id="email"
                         type="email"
                         className="mt-1 block w-full"
-                        value={data.email}
+                        value={formData.email}
                         onChange={(e) => setData("email", e.target.value)}
                         required
                         autoComplete="username"
