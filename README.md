@@ -3,13 +3,13 @@
 
 ## Usage
 
-composer install
-npm install
+- **[composer install]**
+- **[npm install]**
 
 
-- **[config your database and email server]**
-php artisan migrate
+config your database and email server
+- **[php artisan migrate]**
 
 
-npm run dev
-php artisan serve
+- **[npm run dev]**
+- **[php artisan serve]**
