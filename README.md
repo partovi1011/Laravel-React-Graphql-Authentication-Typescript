@@ -3,13 +3,24 @@
 
 ## Usage
 
-```composer install```
-``` npm install```
+```bash
+composer install
+```
 
+```bash
+npm install
+```
 
 config your database and email server
-``` php artisan migrate```
 
+```bash
+php artisan migrate
+```
 
-``` npm run dev```
-``` php artisan serve```
+```bash
+npm run dev
+```
+
+```bash
+php artisan serve
+```
