@@ -1,4 +1,4 @@
-# An Starter Kit for Laravel and React with Graphql
+# Starter Kit for Laravel and React with Graphql
 -Full typescript
 
 please follow the guide
