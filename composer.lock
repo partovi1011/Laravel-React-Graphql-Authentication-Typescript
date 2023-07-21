@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "96331ae040bd02d56eaa4624545b5cf0",
+    "content-hash": "8ccb1934a0a5d2e831f31c8800d173c2",
     "packages": [
         {
             "name": "brick/math",
@@ -2064,16 +2064,16 @@
         },
         {
             "name": "mll-lab/laravel-graphiql",
-            "version": "v3.0.1",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mll-lab/laravel-graphiql.git",
-                "reference": "16f19cea246364b97cca5cf581b7f12099771a70"
+                "reference": "54d7dbe5376ab87a6ea83be11b1431d0af9e2f6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mll-lab/laravel-graphiql/zipball/16f19cea246364b97cca5cf581b7f12099771a70",
-                "reference": "16f19cea246364b97cca5cf581b7f12099771a70",
+                "url": "https://api.github.com/repos/mll-lab/laravel-graphiql/zipball/54d7dbe5376ab87a6ea83be11b1431d0af9e2f6c",
+                "reference": "54d7dbe5376ab87a6ea83be11b1431d0af9e2f6c",
                 "shasum": ""
             },
             "require": {
@@ -2124,9 +2124,9 @@
             ],
             "support": {
                 "issues": "https://github.com/mll-lab/laravel-graphiql/issues",
-                "source": "https://github.com/mll-lab/laravel-graphiql/tree/v3.0.1"
+                "source": "https://github.com/mll-lab/laravel-graphiql/tree/v3.1.0"
             },
-            "time": "2023-06-19T07:58:43+00:00"
+            "time": "2023-07-04T13:58:40+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -6980,16 +6980,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.23.0",
+            "version": "v1.23.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "a2e046f748e87d3ef8b2b381e0e5c5a11f34e46b"
+                "reference": "62582606f80466aa81fba40b193b289106902853"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/a2e046f748e87d3ef8b2b381e0e5c5a11f34e46b",
-                "reference": "a2e046f748e87d3ef8b2b381e0e5c5a11f34e46b",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/62582606f80466aa81fba40b193b289106902853",
+                "reference": "62582606f80466aa81fba40b193b289106902853",
                 "shasum": ""
             },
             "require": {
@@ -7041,7 +7041,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2023-06-16T21:20:12+00:00"
+            "time": "2023-06-28T18:31:28+00:00"
         },
         {
             "name": "mockery/mockery",

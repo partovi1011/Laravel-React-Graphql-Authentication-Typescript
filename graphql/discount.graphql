@@ -1,0 +1,53 @@
+type DiscountPayload {
+    status: Statuses!
+    discount: Discount
+    errors: Mixed
+}
+
+input MakeDiscountInputs {
+    product: ID!
+    discounted_from: DateTime!
+    discounted_to: DateTime!
+    price: Int!
+}
+
+input UpdateDiscountInputs {
+    discount: ID!
+    discounted_from: DateTime
+    discounted_to: DateTime
+    price: Int
+}
+
+extend type Mutation {
+    makeDiscount(input: MakeDiscountInputs! @spread): DiscountPayload!
+        @field(resolver: "App\\GraphQL\\Mutations\\Discount\\Create")
+    updateDiscount(input: UpdateDiscountInputs! @spread): DiscountPayload!
+        @field(resolver: "App\\GraphQL\\Mutations\\Discount\\Update")
+    removeDiscount(discount: ID!): DiscountPayload!
+        @field(resolver: "App\\GraphQL\\Mutations\\Discount\\Remove")
+}
+
+input OrderByClause {
+    field: String!
+    order: SortOrder!
+}
+
+enum SortOrder {
+    ASC
+    DESC
+}
+
+extend type Query {
+    discounts(orderBy: [OrderByClause!] @orderBy): [Discount!]
+        @paginate(defaultCount: 10)
+}
+
+type Discount {
+    id: ID!
+    product: Product!
+    discounted_from: DateTime!
+    discounted_to: DateTime!
+    price: Int!
+    created_at: DateTime!
+    updated_at: DateTime!
+}

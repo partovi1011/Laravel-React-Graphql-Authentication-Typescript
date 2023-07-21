@@ -1,0 +1,10 @@
+extend type Query {
+    payment(payment: ID!): Payment
+}
+type Payment {
+    id: ID!
+    order: Order!
+    transaction: Int!
+    created_at: DateTime!
+    updated_at: DateTime!
+}

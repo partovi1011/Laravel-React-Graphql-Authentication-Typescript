@@ -4,16 +4,30 @@ scalar DateTime
 
 type Query {
     me: User! @auth @guard(with: ["sanctum"])
+    users: [User!] @all
+    tags: [Tag] @field(resolver: "App\\GraphQL\\Queries\\Tags")
 }
 
 type User {
     id: ID!
     name: String!
     email: String!
-    avatar: String
     email_verified_at: DateTime
     created_at: DateTime!
     updated_at: DateTime!
+
+    bookmarks: [Bookmark!]
+    carts: [Cart!]
+    comments: [Comment!]
+    orders: [Order!] @paginate(defaultCount: 2)
 }
 
 #import auth.graphql
+#import discount.graphql
+#import product.graphql
+#import tag.graphql
+#import cart.graphql
+#import bookmark.graphql
+#import comment.graphql
+#import order.graphql
+#import payment.graphql

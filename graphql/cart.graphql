@@ -1,0 +1,43 @@
+enum CartStatuses {
+    carting
+    ordered
+}
+
+input AddToCartInputs {
+    product: ID!
+    user: ID!
+    quantity: Int
+}
+
+input RemoveCartInputs {
+    product: ID!
+    user: ID!
+}
+
+type AddToCartPayload {
+    status: Statuses!
+    carts: [Cart!]
+    total: Int!
+    errors: Mixed
+}
+
+type Mutation {
+    addToCart(input: AddToCartInputs! @spread): AddToCartPayload!
+        @field(resolver: "App\\GraphQL\\Mutations\\Product\\AddToCart")
+    removeCart(input: RemoveCartInputs! @spread): AddToCartPayload!
+        @field(resolver: "App\\GraphQL\\Mutations\\Product\\RemoveCart")
+}
+
+extend type Query {
+    carts: [Cart!]
+}
+
+type Cart {
+    id: ID!
+    user: User!
+    product: Product!
+    quantity: Int!
+    status: CartStatuses!
+    created_at: DateTime!
+    updated_at: DateTime!
+}

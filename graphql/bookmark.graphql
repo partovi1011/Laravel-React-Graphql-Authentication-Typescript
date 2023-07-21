@@ -1,0 +1,31 @@
+enum Statuses {
+    FAILED
+    SUCCESS
+    VALIDATION_ERROR
+}
+
+type BookmarkPayload {
+    status: Statuses!
+    bookmark: Bookmark
+    errors: Mixed
+}
+
+input BookmarksInput {
+    product: ID!
+    user: ID!
+}
+
+extend type Mutation {
+    addBookmark(input: BookmarksInput! @spread): BookmarkPayload!
+        @field(resolver: "App\\GraphQL\\Mutations\\Bookmark\\Create")
+    removeBookmark(input: BookmarksInput! @spread): BookmarkPayload!
+        @field(resolver: "App\\GraphQL\\Mutations\\Bookmark\\Remove")
+}
+
+type Bookmark {
+    id: ID!
+    user: User!
+    product: Product!
+    created_at: DateTime!
+    updated_at: DateTime!
+}

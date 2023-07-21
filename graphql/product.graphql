@@ -1,0 +1,104 @@
+input CreateProductInputs {
+    name: String!
+    description: String!
+    price: Int!
+    stock: Int!
+    tags: [String!]
+    images: [Images]
+}
+
+input UpdateProductInputs {
+    product: ID!
+    name: String
+    description: String
+    price: Int
+    stock: Int
+    tags: [String!]
+    images: [Images]
+}
+
+input PublishProductInputs {
+    product: ID!
+    publish: Boolean!
+}
+
+input FilterInputs {
+    tags: [String]
+    name: String
+    orderBy: String
+    sort: Sort
+}
+
+enum Sort {
+    asc
+    desc
+}
+
+enum Statuses {
+    FAILED
+    SUCCESS
+    VALIDATION_ERROR
+}
+
+type Images {
+    id: Int!
+    path: String!
+    default: Boolean!
+}
+
+type ProductMutationPayload {
+    status: Statuses!
+    product: Product
+    errors: Mixed
+}
+
+input OrderByClause {
+    field: String!
+    order: SortOrder!
+}
+
+enum SortOrder {
+    ASC
+    DESC
+}
+
+extend type Query {
+    products(
+        isPublished: Boolean @scope
+        orderBy: [OrderByClause!] @orderBy
+    ): [Product!] @paginate(defaultCount: 10)
+    product(id: ID! @eq, isPublished: Boolean @scope): Product @find
+}
+
+extend type Mutation {
+    createProduct(input: CreateProductInputs! @spread): ProductMutationPayload!
+        @field(resolver: "App\\GraphQL\\Mutations\\Product\\Create")
+    updateProduct(input: UpdateProductInputs @spread): ProductMutationPayload!
+        @field(resolver: "App\\GraphQL\\Mutations\\Product\\Update")
+    publishProduct(
+        input: PublishProductInputs! @spread
+    ): ProductMutationPayload!
+        @field(resolver: "App\\GraphQL\\Mutations\\Product\\Publish")
+
+    filterProduct(input: FilterInputs @spread): [Product!]
+        @paginate(
+            defaultCount: 10
+            builder: "App\\GraphQL\\Mutations\\Product\\Filter"
+        )
+}
+
+type Product {
+    id: Int!
+    name: String!
+    description: String!
+    price: Int!
+    published: Boolean!
+    stock: Int!
+    sold: Int!
+    tags: [Tag!]! @belongsToMany
+    comments: [Comment!] @hasMany
+    images: [Images!]
+    discount: Discount
+    created_at: DateTime!
+    updated_at: DateTime!
+}

@@ -1,0 +1,41 @@
+enum Statuses {
+    FAILED
+    SUCCESS
+    VALIDATION_ERROR
+}
+
+type CommentPayload {
+    status: Statuses!
+    comment: Comment
+    errors: Mixed
+}
+
+input AddCommentInput {
+    product: ID!
+    user: ID!
+    comment: String!
+    replied: ID
+}
+input PublishCommentInput {
+    comment: ID!
+    publish: Boolean!
+}
+
+extend type Mutation {
+    addComment(input: AddCommentInput! @spread): CommentPayload!
+        @field(resolver: "App\\GraphQL\\Mutations\\Comment\\Create")
+    publishComment(input: PublishCommentInput! @spread): CommentPayload!
+        @field(resolver: "App\\GraphQL\\Mutations\\Comment\\Publish")
+}
+
+type Comment {
+    id: ID!
+    user: User!
+    product: Product!
+    feed: String!
+    replied: Comment
+    published: Boolean!
+    published_at: DateTime
+    created_at: DateTime!
+    updated_at: DateTime!
+}

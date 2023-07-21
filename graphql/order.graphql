@@ -1,0 +1,62 @@
+enum OrderStatus {
+    PACKING
+    PAID
+    SENT
+    WAIT_TO_PAY
+}
+
+type OrderPayload {
+    status: Statuses!
+    order: Order
+    errors: Mixed
+}
+
+input AddOrderInput {
+    user: ID!
+    name: String!
+    tel: String!
+    address: String!
+    zip: Int!
+    note: String
+    shipping_price: Int!
+}
+input UpdateOrder {
+    order: ID!
+    status: OrderStatus!
+}
+
+input CancelOrder {
+    order: ID!
+}
+
+extend type Mutation {
+    makeOrder(input: AddOrderInput! @spread): OrderPayload!
+        @field(resolver: "App\\GraphQL\\Mutations\\Order\\Create")
+    updateOrder(input: UpdateOrder! @spread): OrderPayload!
+        @field(resolver: "App\\GraphQL\\Mutations\\Order\\Update")
+    cancelOrder(input: CancelOrder! @spread): OrderPayload!
+        @field(resolver: "App\\GraphQL\\Mutations\\Order\\Remove")
+}
+
+extend type Query {
+    orders: [Order!] @all
+}
+
+type Order {
+    id: ID!
+    user: User!
+    carts: [Cart!]! @belongsToMany
+    status: OrderStatus!
+    name: String!
+    tel: String!
+    address: String!
+    zip: Int!
+    payment: Payment
+    note: String
+    price: Int!
+    discounted: Int!
+    shipping_price: Int!
+    tracking_code: String
+    created_at: DateTime!
+    updated_at: DateTime!
+}

@@ -1,0 +1,7 @@
+type Tag {
+    id: ID!
+    name: String!
+    products: [Product!] @belongsToMany
+    created_at: DateTime!
+    updated_at: DateTime!
+}
